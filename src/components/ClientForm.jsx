@@ -88,20 +88,19 @@ function ClientForm() {
           <div className="block">
             <div className="mt-2">
               <div>
-                <label className="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    className="
-                      rounded
-                      bg-gray-200
-                      border-transparent
-                      focus:border-transparent focus:bg-gray-200
-                      text-gray-700
-                      focus:ring-1 focus:ring-offset-2 focus:ring-gray-500
-                    "
-                  />
-                  <span className="ml-2">Email me news and special offers</span>
-                </label>
+                <input
+                  type="submit"
+                  value="Add Client"
+                  className="
+                        px-4 
+                        py-2 
+                        font-semibold 
+                        text-sm
+                        bg-gray-700
+                        text-white 
+                        rounded-full 
+                        shadow-sm"
+                />
               </div>
             </div>
           </div>
