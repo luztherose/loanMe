@@ -1,4 +1,5 @@
 import ClientForm from "./ClientForm";
+import AddLoan from "./AddLoan";
 
 function Loan() {
   return (
@@ -9,6 +10,7 @@ function Loan() {
         </h1>
       </div>
       <ClientForm />
+      <AddLoan />
     </>
   );
 }
