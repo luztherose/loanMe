@@ -13,7 +13,9 @@ function AddClient({ client, onChange, onClient } = props) {
   const onSubmitClient = (e) => {
     e.preventDefault();
 
-    setClientLocalStorage(clients, client, setClients);
+    let newClients = [...clients, client];
+    setClients(newClients);
+    setClientLocalStorage(newClients);
 
     onClient({
       name: "",

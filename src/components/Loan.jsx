@@ -14,9 +14,18 @@ function Loan() {
     note: "",
   });
 
-  const handleClientInfoOnChange = (e) => {
+  const [loan, setLoan] = useState({
+    clientName: "",
+    loanAmount: "",
+    interestRate: "",
+    startDate: "",
+    frequency: "",
+    note: "",
+  });
+
+  const handleClientInfo = (e) => {
     let name, governmentId, email, phone, note;
-    // debugger;
+
     switch (e.target.name) {
       case "name":
         name = e.target.value;
@@ -43,11 +52,48 @@ function Loan() {
     }
   };
 
+  const handleLoanInfo = (e) => {
+    let clientName, loanAmount, interestRate, startDate, frequency, note;
+
+    switch (e.target.name) {
+      case "clientName":
+        clientName = e.target.value;
+        setLoan({ ...loan, clientName });
+        break;
+      case "loanAmount":
+        loanAmount = e.target.value;
+        setLoan({ ...loan, loanAmount });
+        break;
+      case "interestRate":
+        interestRate = e.target.value;
+        setLoan({ ...loan, interestRate });
+        break;
+      case "startDate":
+        startDate = e.target.value;
+        setLoan({ ...loan, startDate });
+        break;
+      case "frequency":
+        frequency = e.target.value;
+        setLoan({ ...loan, frequency });
+        break;
+      case "note":
+        note = e.target.value;
+        setLoan({ ...loan, note });
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <>
       <Header />
-      <AddClient client={client} onChange={handleClientInfoOnChange} onClient={setClient} />
-      <AddLoan />
+      <AddClient
+        client={client}
+        onChange={handleClientInfo}
+        onClient={setClient}
+      />
+      <AddLoan loan={loan} onChange={handleLoanInfo} onLoan={setLoan} />
       <ClientLoans />
     </>
   );
