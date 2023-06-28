@@ -1,13 +1,51 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { setClientLocalStorage } from "../helpers";
+import { setClientLocalStorage, getAllClients } from "../helpers";
 
-function AddClient({ client, onChange, onClient } = props) {
+function AddClient() {
+  const [client, setClient] = useState({
+    clientId: "",
+    name: "",
+    governmentId: "",
+    email: "",
+    phone: "",
+    note: "",
+  });
+
+  const handleClientInfo = (e) => {
+    let name, governmentId, email, phone, note;
+
+    switch (e.target.name) {
+      case "name":
+        name = e.target.value;
+        setClient({ ...client, name });
+        break;
+      case "governmentId":
+        governmentId = e.target.value;
+        setClient({ ...client, governmentId, clientId: governmentId });
+        break;
+      case "email":
+        email = e.target.value;
+        setClient({ ...client, email });
+        break;
+      case "phone":
+        phone = e.target.value;
+        setClient({ ...client, phone });
+        break;
+      case "note":
+        note = e.target.value;
+        setClient({ ...client, note });
+        break;
+      default:
+        break;
+    }
+  };
+
   const { name, governmentId, email, phone, note } = client;
   const [clients, setClients] = useState([]);
 
   useEffect(() => {
-    setClients(JSON.parse(localStorage.getItem("clients") || "[]"));
+    setClients(getAllClients());
   }, []);
 
   const onSubmitClient = (e) => {
@@ -17,7 +55,8 @@ function AddClient({ client, onChange, onClient } = props) {
     setClients(newClients);
     setClientLocalStorage(newClients);
 
-    onClient({
+    setClient({
+      clientId: "",
       name: "",
       governmentId: "",
       email: "",
@@ -50,7 +89,7 @@ function AddClient({ client, onChange, onClient } = props) {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               placeholder="Jonh Smith"
-              onChange={onChange}
+              onChange={handleClientInfo}
             />
           </label>
           <label className="block">
@@ -70,7 +109,7 @@ function AddClient({ client, onChange, onClient } = props) {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               placeholder=""
-              onChange={onChange}
+              onChange={handleClientInfo}
             />
           </label>
           <label className="block">
@@ -90,7 +129,7 @@ function AddClient({ client, onChange, onClient } = props) {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               placeholder="john@example.com"
-              onChange={onChange}
+              onChange={handleClientInfo}
             />
           </label>
           <label className="block">
@@ -110,7 +149,7 @@ function AddClient({ client, onChange, onClient } = props) {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               placeholder="555-555-5555"
-              onChange={onChange}
+              onChange={handleClientInfo}
             />
           </label>
           <label className="block">
@@ -129,7 +168,7 @@ function AddClient({ client, onChange, onClient } = props) {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               rows="3"
-              onChange={onChange}
+              onChange={handleClientInfo}
             ></textarea>
           </label>
           <div className="block">
@@ -148,7 +187,7 @@ function AddClient({ client, onChange, onClient } = props) {
                         rounded-full 
                         shadow-sm
                         cursor-pointer"
-                  onChange={onChange}
+                  onChange={handleClientInfo}
                 />
               </div>
             </div>
