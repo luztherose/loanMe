@@ -1,68 +1,46 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { setClientLocalStorage, getAllClients } from "../helpers";
+import {
+  setClientLocalStorage,
+  getClientsLocalStorage,
+} from "../utils/clientHelpers";
 
-function AddClient() {
-  const [client, setClient] = useState({
+import SaveButton from "./SaveButton";
+
+function AddClient({ onClientSave }) {
+  const DEFAULT_CLIENT = {
     clientId: "",
     name: "",
     governmentId: "",
     email: "",
     phone: "",
     note: "",
-  });
-
-  const handleClientInfo = (e) => {
-    let name, governmentId, email, phone, note;
-
-    switch (e.target.name) {
-      case "name":
-        name = e.target.value;
-        setClient({ ...client, name });
-        break;
-      case "governmentId":
-        governmentId = e.target.value;
-        setClient({ ...client, governmentId, clientId: governmentId });
-        break;
-      case "email":
-        email = e.target.value;
-        setClient({ ...client, email });
-        break;
-      case "phone":
-        phone = e.target.value;
-        setClient({ ...client, phone });
-        break;
-      case "note":
-        note = e.target.value;
-        setClient({ ...client, note });
-        break;
-      default:
-        break;
-    }
   };
+  const [client, setClient] = useState(DEFAULT_CLIENT);
 
   const { name, governmentId, email, phone, note } = client;
-  const [clients, setClients] = useState([]);
 
-  useEffect(() => {
-    setClients(getAllClients());
-  }, []);
+  const handleGovernmentIdOnChange = (e) => {
+    let governmentId = e.target.value;
+    const newClient = { ...client, governmentId, clientId: governmentId };
+
+    setClient(newClient);
+  };
+
+  const onFieldChange = (e) => {
+    let field = e.target.name;
+    let value = e.target.value;
+    const newClient = { ...client };
+    newClient[field] = value;
+    setClient(newClient);
+  };
 
   const onSubmitClient = (e) => {
     e.preventDefault();
 
-    let newClients = [...clients, client];
-    setClients(newClients);
-    setClientLocalStorage(newClients);
+    onClientSave(client);
 
-    setClient({
-      clientId: "",
-      name: "",
-      governmentId: "",
-      email: "",
-      phone: "",
-      note: "",
-    });
+    setClient(DEFAULT_CLIENT);
   };
 
   return (
@@ -89,7 +67,8 @@ function AddClient() {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               placeholder="Jonh Smith"
-              onChange={handleClientInfo}
+              onChange={onFieldChange}
+              required
             />
           </label>
           <label className="block">
@@ -109,7 +88,8 @@ function AddClient() {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               placeholder=""
-              onChange={handleClientInfo}
+              onChange={handleGovernmentIdOnChange}
+              required
             />
           </label>
           <label className="block">
@@ -129,7 +109,8 @@ function AddClient() {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               placeholder="john@example.com"
-              onChange={handleClientInfo}
+              onChange={onFieldChange}
+              required
             />
           </label>
           <label className="block">
@@ -149,7 +130,8 @@ function AddClient() {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               placeholder="555-555-5555"
-              onChange={handleClientInfo}
+              onChange={onFieldChange}
+              required
             />
           </label>
           <label className="block">
@@ -168,30 +150,10 @@ function AddClient() {
                 focus:border-gray-500 focus:bg-white focus:ring-0
               "
               rows="3"
-              onChange={handleClientInfo}
+              onChange={onFieldChange}
             ></textarea>
           </label>
-          <div className="block">
-            <div className="mt-2">
-              <div>
-                <input
-                  type="submit"
-                  value="Add Client"
-                  className="
-                        px-4 
-                        py-2 
-                        font-semibold 
-                        text-sm
-                        bg-gray-700
-                        text-white 
-                        rounded-full 
-                        shadow-sm
-                        cursor-pointer"
-                  onChange={handleClientInfo}
-                />
-              </div>
-            </div>
-          </div>
+          <SaveButton value="Save Client" />
         </div>
       </div>
     </form>

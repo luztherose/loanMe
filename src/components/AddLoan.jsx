@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import SaveButton from "./SaveButton";
+
 
 function AddLoan({ clients, onLoanSave } = props) {
   const DEFAULT_LOAN = {
@@ -46,19 +48,18 @@ function AddLoan({ clients, onLoanSave } = props) {
   };
 
   return (
-    <>
-      <form className="py-12" onSubmit={onSubmitLoan}>
-        <h2 className="text-center text-2xl mb-4 font-display text-black">
-          Add Loan
-        </h2>
-        <div className="mt-8 max-w-md my-0 mx-auto">
-          <div className="grid grid-cols-1 gap-6">
-            <label className="block">
-              <span className="text-gray-700">Client</span>
-              <select
-                required
-                value={clientName}
-                className="
+    <form className="py-12" onSubmit={onSubmitLoan}>
+      <h2 className="text-center text-2xl mb-4 font-display text-black">
+        Add Loan
+      </h2>
+      <div className="mt-8 max-w-md my-0 mx-auto">
+        <div className="grid grid-cols-1 gap-6">
+          <label className="block">
+            <span className="text-gray-700">Client</span>
+            <select
+              required
+              value={clientName}
+              className="
                     block
                     w-full
                     mt-1
@@ -67,24 +68,24 @@ function AddLoan({ clients, onLoanSave } = props) {
                     bg-gray-100
                     border-transparent
                     focus:border-gray-500 focus:bg-white focus:ring-0"
-                name="clientName"
-                id="clientName"
-                onChange={handleClientChange}
-              >
-                <option value="">Select Client</option>
-                {clients.map((client, index) => (
-                  <option key={index} value={client.clientId}>
-                    {client.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Loan amount</span>
-              <input
-                type="number"
-                value={loanAmount}
-                className="
+              name="clientName"
+              id="clientName"
+              onChange={handleClientChange}
+            >
+              <option value="">Select Client</option>
+              {clients.map((client, index) => (
+                <option key={index} value={client.clientId}>
+                  {client.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="block">
+            <span className="text-gray-700">Loan amount</span>
+            <input
+              type="number"
+              value={loanAmount}
+              className="
                     mt-1
                     block
                     w-full
@@ -93,19 +94,19 @@ function AddLoan({ clients, onLoanSave } = props) {
                     border-transparent
                     focus:border-gray-500 focus:bg-white focus:ring-0
                   "
-                placeholder=""
-                name="loanAmount"
-                id="loanAmount"
-                onChange={onFieldChange}
-                required
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Interest rate</span>
-              <input
-                type="number"
-                value={interestRate}
-                className="
+              placeholder=""
+              name="loanAmount"
+              id="loanAmount"
+              onChange={onFieldChange}
+              required
+            />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">Interest rate</span>
+            <input
+              type="number"
+              value={interestRate}
+              className="
                     mt-1
                     block
                     w-full
@@ -114,19 +115,19 @@ function AddLoan({ clients, onLoanSave } = props) {
                     border-transparent
                     focus:border-gray-500 focus:bg-white focus:ring-0
                   "
-                placeholder="0 %"
-                name="interestRate"
-                id="interestRate"
-                onChange={onFieldChange}
-                required
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Start Date</span>
-              <input
-                type="date"
-                value={startDate}
-                className="
+              placeholder="0 %"
+              name="interestRate"
+              id="interestRate"
+              onChange={onFieldChange}
+              required
+            />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">Start Date</span>
+            <input
+              type="date"
+              value={startDate}
+              className="
                     mt-1
                     block
                     w-full
@@ -135,17 +136,17 @@ function AddLoan({ clients, onLoanSave } = props) {
                     border-transparent
                     focus:border-gray-500 focus:bg-white focus:ring-0
                   "
-                name="startDate"
-                id="startDate"
-                onChange={onFieldChange}
-                required
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Frequency</span>
-              <select
-                value={frequency}
-                className="
+              name="startDate"
+              id="startDate"
+              onChange={onFieldChange}
+              required
+            />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">Frequency</span>
+            <select
+              value={frequency}
+              className="
                     block
                     w-full
                     mt-1
@@ -155,22 +156,22 @@ function AddLoan({ clients, onLoanSave } = props) {
                     border-transparent
                     focus:border-gray-500 focus:bg-white focus:ring-0
                   "
-                name="frequency"
-                id="frequency"
-                onChange={onFieldChange}
-                required
-              >
-                <option value="">Select</option>
-                <option value="monthly">Monthly</option>
-                <option value="bi-weekly">Bi-Weekly</option>
-                <option value="yearly">Yearly</option>
-              </select>
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Additional details</span>
-              <textarea
-                value={note}
-                className="
+              name="frequency"
+              id="frequency"
+              onChange={onFieldChange}
+              required
+            >
+              <option value="">Select</option>
+              <option value="monthly">Monthly</option>
+              <option value="bi-weekly">Bi-Weekly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </label>
+          <label className="block">
+            <span className="text-gray-700">Additional details</span>
+            <textarea
+              value={note}
+              className="
                     mt-1
                     block
                     w-full
@@ -179,36 +180,16 @@ function AddLoan({ clients, onLoanSave } = props) {
                     border-transparent
                     focus:border-gray-500 focus:bg-white focus:ring-0
                   "
-                rows="3"
-                name="note"
-                id="note"
-                onChange={onFieldChange}
-              ></textarea>
-            </label>
-            <div className="block">
-              <div className="mt-2">
-                <div>
-                  <input
-                    type="submit"
-                    value="Save"
-                    className="
-                        px-4 
-                        py-2 
-                        font-semibold 
-                        text-sm
-                        bg-gray-700
-                        text-white 
-                        rounded-full 
-                        shadow-sm
-                        cursor-pointer"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
+              rows="3"
+              name="note"
+              id="note"
+              onChange={onFieldChange}
+            ></textarea>
+          </label>
+          <SaveButton value="Save Loan"/>
         </div>
-      </form>
-    </>
+      </div>
+    </form>
   );
 }
 
