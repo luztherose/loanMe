@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { getLoansLocalStorage } from "../helpers";
 
 function ClientLoans({ client, loans } = props) {
   const { name } = client;
-
+  if (loans.length == 0) return;
   return (
     <div className="relative rounded-xl overflow-auto">
       <div className="shadow-sm overflow-hidden my-8">

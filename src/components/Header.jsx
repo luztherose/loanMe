@@ -15,8 +15,14 @@ function Header() {
             <li className="mr-5">
               <a href="#">Clients</a>
             </li>
-            <li className="mr-5">
+            <li className="mr-5 mt-12">
               <a href="#">Loans</a>
+              <nav >
+                <ul>
+                  <li><a href="#">Add</a></li>
+                  <li><a href="#">List</a></li>
+                </ul>
+              </nav>
             </li>
             <li className="mr-5">
               <a href="#">Contact</a>
