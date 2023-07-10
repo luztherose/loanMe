@@ -11,7 +11,7 @@ export const getLoansLocalStorage = () =>
 export const saveNewLoanOnLocalStorage = (newLoan) => {
   const loans = getLoansLocalStorage();
   newLoan.loanId = newLoan.loanId + 1;
-  setLoanLocalStorage([...loans, newLoan]);
+  newLoan.nextPaymentDate = setLoanLocalStorage([...loans, newLoan]);
 };
 
 export const getLoansByClient = (loans, selectedClient) => {
