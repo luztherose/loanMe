@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Header from "./Header";
+import MainNav from "./MainNav";
 import AddClient from "./AddClient";
 import AddLoan from "./AddLoan";
 import ClientLoans from "./ClientLoans";
@@ -35,7 +35,7 @@ function Loan() {
 
   return (
     <>
-      <Header />
+      <MainNav />
       {/* <AddClient onClientSave={handleOnClientSave} />
       <AddLoan clients={clients} onLoanSave={handleOnLoanSave} /> */}
       {clients.map((client) => {
