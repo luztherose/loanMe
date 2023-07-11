@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import SaveButton from "./SaveButton";
 
-
 function AddLoan({ clients, onLoanSave } = props) {
   const DEFAULT_LOAN = {
     loanId: 0,
@@ -186,7 +185,7 @@ function AddLoan({ clients, onLoanSave } = props) {
               onChange={onFieldChange}
             ></textarea>
           </label>
-          <SaveButton value="Save Loan"/>
+          <SaveButton value="Save Loan" />
         </div>
       </div>
     </form>

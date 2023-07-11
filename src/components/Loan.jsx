@@ -36,8 +36,8 @@ function Loan() {
   return (
     <>
       <MainNav />
-      {/* <AddClient onClientSave={handleOnClientSave} />
-      <AddLoan clients={clients} onLoanSave={handleOnLoanSave} /> */}
+      <AddClient onClientSave={handleOnClientSave} />
+      <AddLoan clients={clients} onLoanSave={handleOnLoanSave} />
       {clients.map((client) => {
         return (
           <ClientLoans

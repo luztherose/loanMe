@@ -1,9 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { formatCurrency } from "../utils/loanHelpers";
 
 function ClientLoans({ client, loans } = props) {
   const { name } = client;
-  if (loans.length == 0) return;
+  if (loans == undefined || loans.length == 0) return;
   return (
     <div className="relative rounded-xl overflow-auto">
       <div className="shadow-sm overflow-hidden my-8">
@@ -12,7 +13,7 @@ function ClientLoans({ client, loans } = props) {
             <tr className="dark:bg-slate-200">
               <th
                 className="border-b dark:border-slate-600 text-xl p-4 pl-8 pt-0 pb-3 text-black text-center"
-                colspan="5"
+                colSpan="6"
               >
                 {name}
               </th>
@@ -31,29 +32,38 @@ function ClientLoans({ client, loans } = props) {
                 Payment
               </th>
               <th className="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-800 dark:text-slate-200 text-left">
+                Start Date
+              </th>
+              <th className="border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-800 dark:text-slate-200 text-left">
                 Due date
               </th>
             </tr>
           </thead>
           <tbody className="bg-white dark:bg-slate-800">
             {loans.map((loan, index) => {
-              const { loanId, loanAmount, payment, startDate } = loan;
+              const { loanId, loanAmount, startDate, dueDate, interestRate } =
+                loan;
               return (
                 <tr key={index}>
                   <td className="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
                     {loanId}
                   </td>
                   <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-                    {loanAmount}
+                    {formatCurrency(loanAmount)}
                   </td>
                   <td className="border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">
-                    {loanAmount}
+                    {formatCurrency(loanAmount)}
                   </td>
                   <td className="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
-                    {payment}
+                    {formatCurrency(
+                      (Number(loanAmount) * Number(interestRate)) / 100
+                    )}
                   </td>
                   <td className="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
                     {startDate}
+                  </td>
+                  <td className="border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">
+                    {dueDate}
                   </td>
                 </tr>
               );
